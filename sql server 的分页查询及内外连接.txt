@@ -1,0 +1,52 @@
+常用函数
+ISNULL (check_expression , replacement_value )  当check_expression为null 用replacement_value代替
+
+
+
+
+
+分页查询方法一：
+select  top   N  *
+from  表名称
+where  id >M
+
+分页查询方法二：（此方法前提cn_id为int 类型）
+select * 
+from TN_STUDENT 
+order by cn_id offset M rows fetch next N rows only;
+
+分页查询方法三：
+select top  N  *  
+from TN_STUDENT 
+where cn_id  not in (select top M cn_id  from TN_STUDENT order by cn_id) order by cn_id;
+
+
+
+
+N表示--- 每页最大数
+M表示---（当前页下标-1）*每页最大数
+
+currentPaqeIndex    当前页下标  
+onePageDataNumber   每页最大记录数(N)
+maxRowNumber        当前页的起始位置（M）
+
+
+
+
+内连接（join 或者inner join ）
+select * fron table1 inner join table2  on table1.条件列名 = table2.条件列名
+  		     inner join table3  on table2.条件列名 = table3.条件列名
+
+
+完全外连接（full join 或 full outer join）
+select * from table1 full join table2 on  table1.条件列名= table2.条件列名
+		     full join table3  on table2.条件列名 = table3.条件列名
+
+左外连接（left join 或 left outer join)
+select * from  table1 left join table2 on table1.条件列名 = table2.条件列名
+		      left join table3 on table2.条件列名 = table3.条件列名
+
+
+右外连接（right join 或 right outer join）
+select * from  table1 right join table2 on table1.条件列名 = table2.条件列名
+		      left join table3 on table2.条件列名 = table3.条件列名
